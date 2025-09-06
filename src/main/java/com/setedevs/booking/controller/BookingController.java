@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/bookings")
 public class BookingController {
 
     private final BookingService bookingService;
 
-    @PostMapping("/bookings")
+    @PostMapping
     public ResponseEntity createBooking(@RequestBody BookingRequest request) {
         bookingService.createBooking(request);
         return ResponseEntity.ok("Reserva criada com sucesso!");
