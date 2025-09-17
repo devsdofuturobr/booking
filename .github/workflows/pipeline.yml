@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'dev/washington/deploy'
 
 jobs:
 
@@ -49,12 +48,12 @@ jobs:
 
       - name: Argocd - Update Deployment Configuration
         run: |
-          git clone -b dev/washington/deploy https://${{ secrets.PASSWORD_GIT_CI }}@github.com/devsdofuturobr/argocd.git
+          git clone https://${{ secrets.PASSWORD_GIT_CI }}@github.com/devsdofuturobr/argocd.git
           cd argocd/apps/services/${{ env.SERVICE_NAME }}/${{ env.APP_NAME }}/
           cp deployment.yaml deployment.yaml.old
           sed -i "s/image:.*$/image: ${{ secrets.DOCKER_USERNAME }}\/${{ env.APP_NAME }}:${{ steps.random_tag.outputs.TAG }}/" deployment.yaml
           git add deployment.yaml.old
           git add deployment.yaml
           git commit -m "[${{ env.SERVICE_NAME }}] - Update Docker image tag: ${{ steps.random_tag.outputs.TAG }}"
-          git push origin dev/washington/deploy
+          git push origin master
           echo "Check Deploy in ArgoCD Application"
