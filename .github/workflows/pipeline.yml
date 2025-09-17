@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'dev/washington/deploy'
 
 jobs:
 
