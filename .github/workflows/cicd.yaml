@@ -48,7 +48,7 @@ jobs:
 
       - name: Argocd - Update Deployment Configuration
         run: |
-          git clone https://${{ secrets.PASSWORD_GIT_CI }}@github.com/devsdofuturobr/argocd.git
+          git clone -b master https://${{ secrets.PASSWORD_GIT_CI }}@github.com/devsdofuturobr/argocd.git
           cd argocd/apps/services/${{ env.SERVICE_NAME }}/${{ env.APP_NAME }}/
           cp deployment.yaml deployment.yaml.old
           sed -i "s/image:.*$/image: ${{ secrets.DOCKER_USERNAME }}\/${{ env.APP_NAME }}:${{ steps.random_tag.outputs.TAG }}/" deployment.yaml
