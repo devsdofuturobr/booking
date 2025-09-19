@@ -4,9 +4,9 @@ spring:
 
   # PostgreSQL Data Source Configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/booking_db
-    username: postgres
-    password: postgres
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/booking_db}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -18,24 +18,24 @@ spring:
   # JPA/Hibernate Configuration
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql: ${JPA_SHOW_SQL:true}
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   # RabbitMQ Configuration
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: admin
-    password: admin123
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:admin}
+    password: ${RABBITMQ_PASSWORD:admin123}
     virtual-host: /
 
 # Server Configuration
 server:
-  port: 9002
+  port: ${SERVER_PORT:9002}
 
 # Logging
 logging:
